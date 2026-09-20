@@ -83,5 +83,13 @@
   },
   "appearance": {
     "default": "dark"
+  },
+  "fonts": {
+    "heading": {
+      "family": "Space Grotesk"
+    },
+    "body": {
+      "family": "Source Sans Pro"
+    }
   }
 }
