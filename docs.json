@@ -59,7 +59,12 @@
       "perplexity",
       "mcp",
       "cursor",
-      "vscode"
+      "vscode",
+      "aistudio",
+      "devin",
+      "grok",
+      "add-mcp",
+      "devin-mcp"
     ]
   },
   "footer": {
