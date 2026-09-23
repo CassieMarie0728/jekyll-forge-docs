@@ -1,0 +1,24 @@
+---
+title: "Desktop mode on a phone"
+description: "Choose the full desktop layout when tiny text is your chosen form of entertainment."
+---
+
+In account settings, choose **Desktop layout** to use the full workspace on a mobile browser. Choose **Automatic / mobile** to restore the responsive layout. The user menu also offers a route back.
+
+The desktop option sets a 1,280-pixel viewport. On a phone, text becomes smaller; pinch to zoom. This is a layout preference, not a change to your posts or repository.
+
+The preference is stored in this browser's local storage. Another browser or device can use a different setting. If storage is unavailable, the selection still applies to the current page but may not persist.
+
+## Getting unstuck
+
+If controls become too small, zoom in and return to **Automatic / mobile**. Your browser's own “desktop site” option and zoom settings can affect the result too. Test the app setting independently before combining both controls.
+
+The mobile layout keeps access to post details, the post drawer, write/preview switching, AI, snapshots, Save, and Publish. Desktop mode is a preference, not a prerequisite for editing.
+
+These browser modes are separate from the native Expo app. Physical-device acceptance for the migrated native app is tracked separately.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[client/src/lib/displayMode.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/lib/displayMode.ts), [client/src/pages/UserSettings.tsx](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/pages/UserSettings.tsx), [client/src/pages/Editor.tsx](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/pages/Editor.tsx).

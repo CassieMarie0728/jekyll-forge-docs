@@ -1,0 +1,51 @@
+---
+title: "Markdown, front matter, and preview"
+description: "Write useful Markdown, preserve metadata, and understand what the preview can prove."
+---
+
+The editor works with a Markdown body and YAML front matter. Your Jekyll theme determines how the finished site renders that content. Forge's preview helps you edit; it does not run your complete production theme and plugin pipeline.
+
+## A minimal post
+
+```markdown
+---
+title: "A little less chaos"
+layout: post
+date: 2026-09-20
+tags:
+  - writing
+  - jekyll
+---
+
+## The part worth saying
+
+Your words go here. **Emphasis** is optional. Meaning is not.
+```
+
+Use the layout your theme actually provides. `post` is an example, not a universal Jekyll law. Required fields, categories, excerpt behavior, image fields, and custom metadata vary by theme.
+
+## Formatting without placeholder debris
+
+Heading controls format the current line and replace existing heading markers. They should not insert labels such as “Heading 1” into your prose. List formatting preserves selected content; empty inline formatting places the caret inside its markers.
+
+Use one top-level document title according to your theme's conventions. Many themes already display the front-matter title, so a duplicate body H1 may be unnecessary.
+
+## Metadata that survives a round trip
+
+Forge parses and serializes YAML with a YAML library. Nested values, multiline strings, quoted text, and backslashes are supported. Malformed YAML is rejected instead of silently published. Parsing and serialization can normalize formatting; comments are not a dependable place to keep information you need preserved.
+
+When editing structured metadata, keep arrays as arrays and nested objects as objects. If a field contains a date-like string that must remain a string, quote it and verify the serialized output before publication.
+
+## Preview versus production
+
+Check headings, links, lists, and ordinary Markdown in the editor. Check Liquid templates, custom plugins, theme layouts, and final image URLs in the actual Jekyll build. A local preview looking fine cannot rescue a missing gem in your deployment.
+
+## Moving between posts
+
+Save or download your work before switching posts. New Post can ask before discarding unsaved edits; refresh and close also warn. Browser recovery provides another route back, but warnings and recovery are not a substitute for saving important work.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[client/src/pages/Editor.tsx](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/pages/Editor.tsx), [client/src/lib/editorMarkdown.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/lib/editorMarkdown.ts), [client/src/components/FrontMatterEditor.tsx](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/components/FrontMatterEditor.tsx).

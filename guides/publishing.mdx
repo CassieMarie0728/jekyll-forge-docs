@@ -1,0 +1,51 @@
+---
+title: "Review and publish"
+description: "Inspect the repository, branch, path, and content diff before your words become a GitHub commit."
+---
+
+Publishing changes a real repository. The review screen exists because “probably the right branch” is a terrible release strategy.
+
+## Before you publish
+
+- Sign in and connect a GitHub token with access to the target repository.
+- Select the intended workspace and branch.
+- Save or download any work you cannot afford to lose.
+- Confirm the post's title, date, layout, and other theme-required front matter.
+
+## Review the destination
+
+Open the publishing dialog and inspect **all four** items:
+
+| Item | Check |
+| --- | --- |
+| Repository | The owner and repository are your intended blog |
+| Branch | The branch is the one your deployment or review workflow expects |
+| Path | The file belongs under the intended site root and post directory |
+| Diff | Added and removed lines reflect your intended edit |
+
+The destination review must load successfully and be acknowledged. Changing content or destination invalidates the acknowledgement. Refresh and review again; the earlier approval belongs to an earlier change.
+
+For an existing file, Forge uses the reviewed GitHub SHA when committing. If somebody changes the file after your review, GitHub can reject the stale write. Download your editor version, fetch the new destination, and reconcile the differences. Repeatedly smashing Publish is not conflict resolution.
+
+## Choose your publishing path
+
+**Direct commit:** writes to the selected destination branch. A successful commit does not prove your Jekyll build passed.
+
+**Feature branch or pull request:** isolates the change for review. The base branch is not published merely because another branch contains the new file. Follow your repository's merge and deployment process.
+
+**Scheduled publication:** queues a future creation. Scheduling is creation-only; it does not overwrite an existing published file. Read [Scheduling](/guides/scheduling) before choosing a target.
+
+## Verify after publishing
+
+1. Open the commit or file on GitHub and confirm its branch, path, and content.
+2. Check the repository's deployment workflow for a successful build.
+3. Open the public post URL and verify text, images, and links.
+4. If the commit exists but the site does not change, investigate the Jekyll build and deployment branch before publishing another copy.
+
+An existing post keeps its path when you change the title. A title edit is not an automatic URL migration. Plan redirects separately if you deliberately change a published path.
+
+## When the result is ambiguous
+
+If a request times out after a write, inspect GitHub before retrying. The remote write may have succeeded even though Forge did not receive the response. Preserve your local version and compare the remote file or commit history.
+
+**Evidence:** [publishing UI](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/components/PublishDialog.tsx) and [GitHub procedures](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts). Live destination review was exercised during the September 20 audit; that audit did not publish or overwrite a real blog post.

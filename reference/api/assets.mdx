@@ -1,0 +1,95 @@
+---
+title: "assets procedures"
+description: "Source input schemas, access wrappers, and handler links for assets."
+---
+
+These entries are extracted from the source, not hand-invented endpoint examples. Read [API conventions](/reference/api-overview) before calling them.
+
+## assets.list
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/assets.ts#L22).
+
+```typescript
+z.object({ siteId: z.number() })
+```
+
+## assets.upload
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/assets.ts#L25).
+
+```typescript
+z.object({
+        siteId: z.number(),
+        name: z.string().min(1).max(256),
+        path: z.string(),
+        base64Content: z.string().max(7_000_000),
+        mimeType: z.string(),
+        size: z.number(),
+        width: z.number().optional(),
+        height: z.number().optional(),
+        optimize: z.boolean().default(false),
+        maxWidth: z.number().optional(),
+        outputFormat: z.enum(["webp", "jpeg", "png", "original"]).optional(),
+        quality: z.number().min(1).max(100).optional(),
+      })
+```
+
+## assets.reoptimize
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/assets.ts#L144).
+
+```typescript
+z.object({
+        id: z.number(),
+        maxWidth: z.number().optional(),
+        outputFormat: z.enum(["webp", "jpeg", "png"]).optional(),
+        quality: z.number().optional(),
+      })
+```
+
+## assets.update
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/assets.ts#L175).
+
+```typescript
+z.object({
+        id: z.number(),
+        name: z.string().optional(),
+        path: z.string().optional(),
+        alt: z.string().optional(),
+      })
+```
+
+## assets.delete
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/assets.ts#L188).
+
+```typescript
+z.object({ id: z.number() })
+```
+
+## assets.generateAltText
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/assets.ts#L191).
+
+```typescript
+z.object({ assetId: z.number() })
+```
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers/assets.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/assets.ts).

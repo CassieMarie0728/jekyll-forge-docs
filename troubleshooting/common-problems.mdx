@@ -1,0 +1,39 @@
+---
+title: "When something breaks"
+description: "A symptom-first guide that starts with preserving your work."
+---
+
+Before troubleshooting an editor problem, save or download your current draft. Recovery is easier when nobody has burned the evidence.
+
+| Symptom | First checks | Next guide |
+| --- | --- | --- |
+| Draft says locally saved but is missing from the list | Browser recovery versus Save; current workspace; save result | [Draft recovery](/guides/drafts-and-recovery) |
+| Main blog is missing from the picker | Connected token identity, repository selection, organization rules, pagination | [GitHub access](/guides/github-access) |
+| GitHub rejects publication | Current file SHA, branch, token permission, path conflict | [Publishing](/guides/publishing) |
+| Commit exists but post is not live | Jekyll build, deployment branch, front matter, public path | [Themes and health](/guides/themes-and-health) |
+| Image works in Forge but not the blog | Private preview URL versus repository path; Jekyll baseurl | [Assets](/guides/assets) |
+| AI returns 401 or 403 | Key validity, selected provider/model, account access | [AI](/guides/ai) |
+| AI returns 429 | App window, upstream quota, provider account limits | [AI catalog](/reference/ai-catalog) |
+| AI output stops early | Output cap and requested length | [AI](/guides/ai) |
+| Scheduled post is late | Timezone, cron interval, backlog, job error, remote commit | [Scheduling](/guides/scheduling) |
+| Phone UI is tiny | Desktop layout, browser desktop-site setting, zoom | [Display mode](/guides/display-mode) |
+
+## Sign-in loops
+
+For the hosted app, start from its current HTTPS address. For a self-hosted app, check `APP_URL`, the GitHub OAuth callback, and the configured secrets. Local OAuth should use the API origin on port 8787 rather than an unrelated preview port. Never share session cookies or tokens in a bug report.
+
+## Report enough information to reproduce
+
+Include the page, approximate time and timezone, browser/device, operation, expected result, actual error, and whether the remote file changed. Include a minimal non-sensitive example if content triggers the problem.
+
+Remove tokens, cookies, account secrets, private manuscript text, and private repository contents. A screenshot of a key is still a leaked key even if the caption says “please ignore this.”
+
+## Do not start with destructive fixes
+
+Do not delete the database, clear browser storage, reset the repository, or repeatedly rotate secrets to troubleshoot a UI failure. Preserve work, identify the failing layer, and make the smallest targeted correction.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers/github.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts), [server/worker.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/worker.ts), [client/src/components/DraftRecovery.tsx](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/components/DraftRecovery.tsx).

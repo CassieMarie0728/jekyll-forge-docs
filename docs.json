@@ -1,37 +1,101 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "willow",
-  "name": "Jekyll Forge Docs",
+  "name": "Jekyll Forge",
   "colors": {
-    "primary": "#19253D",
-    "light": "#699FFF",
-    "dark": "#070A0F"
+    "primary": "#981518",
+    "light": "#981518",
+    "dark": "#F18B8D"
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "pages": [
+    "tabs": [
       {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
+        "tab": "Use Forge",
+        "groups": [
+          {
+            "group": "Start here",
+            "pages": [
+              "index",
+              "quickstart",
+              "reference/current-state"
+            ]
+          },
+          {
+            "group": "Write and publish",
+            "pages": [
+              "guides/github-access",
+              "guides/workspaces",
+              "guides/editor",
+              "guides/drafts-and-recovery",
+              "guides/publishing",
+              "guides/scheduling",
+              "guides/assets"
+            ]
+          },
+          {
+            "group": "Make it yours",
+            "pages": [
+              "guides/ai",
+              "guides/deadpool-cool",
+              "guides/themes-and-health",
+              "guides/display-mode",
+              "guides/social-and-mobile"
+            ]
+          },
+          {
+            "group": "Fix the problem",
+            "pages": [
+              "troubleshooting/common-problems",
+              "reference/glossary"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Run and develop",
+        "groups": [
+          {
+            "group": "Operate Forge",
+            "pages": [
+              "hosting/architecture",
+              "hosting/local-development",
+              "hosting/deploy",
+              "hosting/security-and-backups",
+              "reference/configuration"
+            ]
+          },
+          {
+            "group": "Implementation reference",
+            "pages": [
+              "reference/ai-catalog",
+              "reference/data-model",
+              "reference/api-overview"
+            ]
+          },
+          {
+            "group": "Procedure catalog",
+            "pages": [
+              "reference/api/auth",
+              "reference/api/system",
+              "reference/api/ab-testing",
+              "reference/api/ai",
+              "reference/api/ai-providers",
+              "reference/api/assets",
+              "reference/api/blocks",
+              "reference/api/github",
+              "reference/api/notifications",
+              "reference/api/posts",
+              "reference/api/repurposing",
+              "reference/api/scheduler",
+              "reference/api/sites",
+              "reference/api/snapshots",
+              "reference/api/social-media"
+            ]
+          }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
@@ -40,14 +104,14 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "Source code",
+        "href": "https://github.com/CassieMarie0728/jekyll-forge"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "Launch Forge",
+      "href": "https://jekyll-forge.c728.workers.dev/repos"
     }
   },
   "contextual": {
@@ -69,16 +133,13 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/CassieMarie0728",
-      "github": "https://github.com/CassieMarie0728",
-      "linkedin": "https://linkedin.com/in/CassandraCrossno"
+      "github": "https://github.com/CassieMarie0728/jekyll-forge"
     }
   },
   "background": {
-    "decoration": "gradient",
     "color": {
-      "light": "#E9EBEF",
-      "dark": "#0D0B15"
+      "light": "#f5f5f5",
+      "dark": "#0b0f0f"
     }
   },
   "appearance": {
@@ -91,5 +152,6 @@
     "body": {
       "family": "Source Sans Pro"
     }
-  }
+  },
+  "description": "The Jekyll Forge field manual: writing, recovery, GitHub publishing, optional AI, and self-hosting."
 }

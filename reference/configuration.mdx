@@ -1,0 +1,40 @@
+---
+title: "Configuration and commands"
+description: "Separate public deployment values from secrets and historical settings."
+---
+
+| Name | Kind | Purpose |
+| --- | --- | --- |
+| `APP_URL` | Worker variable | Final app origin; production must use HTTPS |
+| `GITHUB_CLIENT_ID` | Public OAuth identifier | Identifies the GitHub OAuth app |
+| `GITHUB_CLIENT_SECRET` | Secret | Completes the OAuth exchange |
+| `JWT_SECRET` | Secret | Signs sessions and derives AI-key encryption material |
+| `OWNER_GITHUB_ID` | Worker variable | Numeric GitHub identity used for the operator |
+| `DB` | D1 binding | Application database |
+| `ASSETS` | Static asset binding | Built browser client and public welcome files |
+| `EXPO_PUBLIC_API_URL` | Native build configuration | HTTPS API origin used by the mobile build |
+
+Keep local secrets in `.dev.vars`, excluded from Git. Production secrets belong in Cloudflare's secret store. Public client IDs are not client secrets, but do not copy another operator's app configuration into your own deployment.
+
+## Maintainer commands
+
+| Command | Effect |
+| --- | --- |
+| `pnpm dev` | Build browser assets and run the local Worker |
+| `pnpm dev:ui` | Vite UI development server with API proxy |
+| `pnpm build` | Production browser build |
+| `pnpm check` | TypeScript check |
+| `pnpm test` | Vitest run |
+| `pnpm db:local` | Apply D1 migrations locally |
+| `pnpm db:remote` | Apply migrations to the configured remote database |
+| `pnpm cf:types` | Generate Worker environment types |
+| `pnpm cf:check` | Build and deployment dry run |
+| `pnpm cf:deploy` | Configuration guard, build, and actual deployment |
+
+`db:generate` exists, but generated schema changes still require review. A command appearing in the package manifest does not establish that it is harmless against production.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[package.json](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/package.json), [wrangler.jsonc](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/wrangler.jsonc), [server/_core/runtime.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/_core/runtime.ts), [scripts/check-deployment.mjs](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/scripts/check-deployment.mjs).

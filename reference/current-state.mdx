@@ -1,0 +1,48 @@
+---
+title: "Current state and evidence"
+description: "What is deployed, what was exercised, and what still needs acceptance."
+---
+
+This manual describes the Cloudflare application at revision `c889b55`, as of September 20, 2026. It does not silently treat older Manus setup instructions as current.
+
+| Area | Evidence | Boundary |
+| --- | --- | --- |
+| Hosted app | Worker version `e019365b-34e1-412c-b9f6-7ae373518bea` deployed | Deployment alone does not prove every integration |
+| Public landing | GitHub Pages commit `3fa388d`, successful deployment | Separate from the app runtime |
+| Welcome and launch | Both live landing surfaces rendered; Launch reached GitHub OAuth sign-in | Fresh-session test did not complete a new sign-in |
+| Authenticated web workspace | User sign-in and selected workspace observed in the task | Not a new automated acceptance of every write |
+| Frontend repairs | Recorded component tests, mobile browser checks, later 50 targeted checks | Audit reports are dated evidence, not tests rerun by this docs build |
+| Publish review | Real destination diff inspected | No production post was overwritten during the review audit |
+| Recovery | Implementation and regression tests reviewed | Full crash recovery across every browser/device remains unproven |
+| AI | Provider code, limits, settings, and tone reviewed | Production generation for every provider is not verified |
+| Social publishing | Code and explicit failure boundaries documented | External delivery and credentials not fully accepted |
+| Native mobile | Source present | Physical-device migration and distribution acceptance remain open |
+
+## Labels used in this manual
+
+**Source-reviewed:** behavior is supported by the linked implementation. It may not have been exercised against a live upstream service.
+
+**Tested:** a named test or walkthrough has recorded results. Check whether upstream calls were mocked and whether the evidence predates the current deployment.
+
+**Unknown / not verified:** the evidence does not support a stronger claim. This is a useful answer, not a failure of enthusiasm.
+
+**Not applicable:** a feature or claim does not apply to this runtime—for example, keeping your laptop on to serve the hosted app.
+
+## Known limitations
+
+- Existing build output includes large JavaScript chunks; measured performance work remains.
+- Two historical Pages workflows remain in the app repository. The new landing layout supports both artifact shapes; consolidating workflows remains separate maintenance.
+- Jekyll custom themes may require manual dependencies and deployment changes.
+- Browser recovery is local to one browser profile.
+- Provider quotas and billing can change independently of the app catalog.
+- Historical audit files can describe old failures that later follow-up sections resolved. Read their dates and follow-ups.
+
+## Updating the evidence
+
+When code changes, update the source revision, affected guides, generated procedure catalog, and this ledger. Record actual results. Do not promote “has a test file” into “all tests passed.”
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[FRONTEND_AUDIT_2026-09-20.md](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/FRONTEND_AUDIT_2026-09-20.md), [server/worker.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/worker.ts), [landing/QA.md](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/landing/QA.md).

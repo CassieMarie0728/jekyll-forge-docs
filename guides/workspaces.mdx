@@ -1,0 +1,36 @@
+---
+title: "Workspaces, branches, and repository files"
+description: "Understand what Forge tracks and why a zero dashboard count does not mean your blog is empty."
+---
+
+A Forge workspace identifies a GitHub repository, selected branch, and optional site root. The database record also stores preferences such as timezone, default layout, and asset path.
+
+## Confirm context before editing
+
+Check the owner/repository and branch whenever you enter a workspace. The same filename can contain different content on different branches. A root path scopes a site inside a larger repository; it is not the same thing as Jekyll's public `baseurl`.
+
+## Two inventories, two meanings
+
+| View | What it counts |
+| --- | --- |
+| Dashboard / Forge posts | Content tracked in Forge's database |
+| Repository files | Files found in the selected GitHub tree |
+| Public blog | Content rendered by Jekyll and deployed by your hosting workflow |
+
+A repository can contain years of writing while Forge's dashboard shows zero saved posts. That is a scope difference, not evidence that the app ate your life's work.
+
+## Browse existing content
+
+Open **Repository files**, search the file list, and use the post/draft or media filters. Use editor links for supported content and GitHub links to inspect the source. The inventory is read-only; browsing it is not a bulk import or a repository rewrite.
+
+Large GitHub trees can be truncated. Forge discloses truncation, so do not treat an incomplete tree as an exhaustive inventory. Verify missing paths directly on GitHub when necessary.
+
+## Change branches carefully
+
+Preserve unsaved edits before changing context. Confirm the active branch again in the publishing review. Do not assume a branch commit updates the default branch or the public site. Your repository's deployment configuration decides what gets built.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[client/src/pages/RepositoryInventory.tsx](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/pages/RepositoryInventory.tsx), [client/src/pages/Dashboard.tsx](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/pages/Dashboard.tsx), [server/routers/sites.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/sites.ts), [server/routers/github.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts).

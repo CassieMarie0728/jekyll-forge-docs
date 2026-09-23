@@ -1,0 +1,49 @@
+---
+title: "Save, recover, publish"
+description: "Know where your words live, what each save action protects, and how to recover a draft without overwriting the wrong version."
+---
+
+Your draft has several possible homes. They are not interchangeable, no matter how confidently a button says “saved.”
+
+| Mechanism | Location | What it means | What it does not mean |
+| --- | --- | --- | --- |
+| Browser recovery | Local storage in the current browser | Forge captured a recovery copy of dirty editor content | Another browser or device can retrieve it |
+| Save | Forge's D1 database | The draft belongs to your Forge account and workspace | A file was committed to GitHub |
+| Autosave | Forge's database, for an existing saved post | Working content was saved after editing | A brand-new unsaved post has been published or backed up everywhere |
+| Snapshot | Forge's database | A revision is available through the snapshot tools | A full database backup exists |
+| Publish | Selected GitHub repository and branch | Forge writes a repository file after review | GitHub Pages has finished building your website |
+
+## Save a new draft
+
+1. Confirm the correct repository and branch in the workspace.
+2. Open **New Post** and enter your title, front matter, and Markdown.
+3. Click **Save** and wait for the save to succeed.
+4. Open the post list and confirm the draft appears. If it does not, check the workspace and save status before creating a duplicate.
+
+A message saying **Recovery copy saved on this browser** is deliberately specific. It is your browser's safety net, not a receipt from the database.
+
+## Restore after a crash or accidental navigation
+
+1. Return using the same browser profile, sign in as the same Forge user, and open the same workspace.
+2. Open **Recovery drafts**.
+3. Compare the path and timestamp. Download a copy before replacing editor content if you are uncertain which version is newer.
+4. Restore the intended version, inspect the title and front matter, and save it in Forge.
+5. If you intend to publish, review the GitHub destination separately.
+
+Recovery entries are separated by user and workspace. They are not encrypted vaults or cross-device synchronization. Clearing browser site data, using another profile, or closing an ephemeral private-browsing session can remove access to them.
+
+<Warning>
+  Do not clear browser storage to troubleshoot a missing draft until you have downloaded any recoverable work. That is the digital equivalent of burning the notebook to fix a typo.
+</Warning>
+
+## When saving fails
+
+Preserve the current text first. Use the recovery download, or copy the Markdown and front matter to a local file. Check your connection and sign-in state, then retry. Existing-post autosaves show waiting, saving, saved, and failure states; a failure requires attention rather than optimism.
+
+Editor saves are serialized so an older response cannot overwrite the state of a newly selected post. This reduces a race condition; it does not make concurrent edits from different devices merge automatically.
+
+## Snapshots and Git history
+
+Use snapshots for revisions inside Forge. Use GitHub history for committed repository changes. Before restoring either, preserve current unsaved work. Restoring an editor revision and publishing it are separate actions.
+
+**Evidence:** source-reviewed against the deployed app revision `c889b55`, September 20, 2026. See [recovery implementation](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/components/DraftRecovery.tsx), [editor](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/pages/Editor.tsx), and [post storage procedures](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/posts.ts).

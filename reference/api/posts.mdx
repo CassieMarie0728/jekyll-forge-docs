@@ -1,0 +1,125 @@
+---
+title: "posts procedures"
+description: "Source input schemas, access wrappers, and handler links for posts."
+---
+
+These entries are extracted from the source, not hand-invented endpoint examples. Read [API conventions](/reference/api-overview) before calling them.
+
+## posts.list
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/posts.ts#L16).
+
+```typescript
+z.object({ siteId: z.number() })
+```
+
+## posts.get
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/posts.ts#L20).
+
+```typescript
+z.object({ id: z.number() })
+```
+
+## posts.upsert
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/posts.ts#L24).
+
+```typescript
+z.object({
+        siteId: z.number(),
+        path: z.string(),
+        filename: z.string().optional(),
+        slug: z.string().optional(),
+        title: z.string().optional(),
+        status: z
+          .enum([
+            "draft",
+            "published",
+            "modified",
+            "new",
+            "scheduled",
+            "archived",
+          ])
+          .optional(),
+        frontMatter: z.record(z.string(), z.unknown()).optional(),
+        markdown: z.string().optional(),
+        sha: z.string().optional(),
+        scheduledAt: z.date().optional(),
+      })
+```
+
+## posts.update
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/posts.ts#L62).
+
+```typescript
+z.object({
+        id: z.number(),
+        path: z.string().optional(),
+        title: z.string().optional(),
+        slug: z.string().optional(),
+        status: z
+          .enum([
+            "draft",
+            "published",
+            "modified",
+            "new",
+            "scheduled",
+            "archived",
+          ])
+          .optional(),
+        frontMatter: z.record(z.string(), z.unknown()).optional(),
+        markdown: z.string().optional(),
+        sha: z.string().optional(),
+        scheduledAt: z.date().optional().nullable(),
+      })
+```
+
+## posts.delete
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/posts.ts#L99).
+
+```typescript
+z.object({ id: z.number() })
+```
+
+## posts.autosave
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/posts.ts#L110).
+
+```typescript
+z.object({
+        id: z.number(),
+        markdown: z.string(),
+        frontMatter: z.record(z.string(), z.unknown()),
+      })
+```
+
+## posts.getFrontMatterTemplates
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/posts.ts#L122).
+
+```typescript
+z.object({ siteId: z.number().optional() })
+```
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers/posts.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/posts.ts).

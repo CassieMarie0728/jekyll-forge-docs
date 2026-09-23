@@ -1,0 +1,48 @@
+---
+title: "Secrets, backups, and rollback"
+description: "Protect the data that a successful redeployment cannot recreate."
+---
+
+Back up application data and repository content separately. A GitHub repository is not a backup of Forge-only drafts. A D1 export is not a backup of browser-only recovery copies.
+
+## Backup inventory
+
+| Data | Preservation method |
+| --- | --- |
+| GitHub posts and assets | Repository history and an independent repository backup |
+| Forge drafts, settings, queues, and integrations | Private D1 export |
+| Browser recovery | Download needed drafts from that browser |
+| Worker configuration and code | Version-controlled source and deployment identifiers |
+| Secrets | A secure operator-controlled secret store with a recovery plan |
+
+```bash
+pnpm exec wrangler d1 export DB --remote --output private-backup.sql
+```
+
+Confirm the target before exporting. The resulting file contains sensitive account and integration data. Keep it out of the repository and docs site. Test restoration into an isolated database before claiming your backup strategy works.
+
+## Credential boundaries
+
+AI provider keys use application-level AES-256-GCM encryption derived from `JWT_SECRET`. Repository tokens are persisted in the user record; the GitHub connection code does not apply that same AI-key encryption wrapper. Do not describe every stored credential as identically encrypted by the app.
+
+Platform storage protections and application-level encryption are different controls. Restrict database exports, operator access, and logs accordingly. Never log key values to prove that a secret was saved.
+
+## Rotate intentionally
+
+For a compromised provider key, revoke it at the provider and save a replacement in Forge. For a compromised repository token, revoke it on GitHub and reconnect the replacement. Changing `JWT_SECRET` invalidates sessions and prevents decryption of AI keys encrypted with the old secret; plan credential re-entry and recovery before rotating it.
+
+## Roll back a release
+
+Record the current Worker version and back up D1 before deployment. Restore a known working Worker version when necessary, and verify schema compatibility. Reverting code does not automatically reverse database migrations or undo GitHub writes.
+
+If a post was published incorrectly, use a reviewed GitHub correction. Do not erase the database or reset unrelated repository history as a rollback shortcut.
+
+## What this guide does not claim
+
+This is an operational guide, not a security certification or legal privacy policy. A complete production security review, retention policy, and disaster-recovery exercise remain separate work.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/ai/freeProvider.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/ai/freeProvider.ts), [server/routers/github.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts), [drizzle/schema.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/drizzle/schema.ts), [CLOUDFLARE_SETUP.md](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/CLOUDFLARE_SETUP.md).

@@ -1,33 +1,17 @@
-> **First-time setup**: Customize this file for your project. Prompt the user to customize this file for their project.
-> For Mintlify product knowledge (components, configuration, writing standards),
-> install the Mintlify skill: `npx skills add https://mintlify.com/docs`
+# Jekyll Forge documentation instructions
 
-# Documentation project instructions
+Document the deployed Cloudflare app from source evidence. See reference/current-state.mdx for the pinned application revision. Historical Manus guides are not current runtime authority.
 
-## About this project
+## Voice
 
-- This is a documentation site built on [Mintlify](https://mintlify.com)
-- Pages are MDX files with YAML frontmatter
-- Configuration lives in `docs.json`
-- Use the Mintlify MCP server, `https://mcp.mintlify.com`, to edit content and settings via MCP
-- Use the Mintlify docs MCP server, `https://www.mintlify.com/docs/mcp`, to query information about using Mintlify via MCP
+Use the author's Deadpool-cool voice: direct, witty, irreverent, and useful. Swearing is optional emphasis, never filler. Joke about the situation, not vulnerable people. No franchise impersonation or borrowed catchphrases. Preserve factual accuracy and emotional meaning. Never invent capabilities, success receipts, quotes, or experiences for a punchline.
 
-## Terminology
+## Content
 
-{/* Add product-specific terms and preferred usage */}
-{/* Example: Use "workspace" not "project", "member" not "user" */}
+Separate browser recovery, Forge Save, snapshots, GitHub Publish, and website deployment. Identify source-reviewed, tested, unknown, and not-applicable claims. Link implementation evidence to an immutable app revision. Do not expose credentials, private drafts, database exports, or local account paths. AI is optional; provider billing and quotas remain account-controlled. Do not claim every credential uses the AI-key encryption wrapper.
 
-## Style preferences
+## Structure and validation
 
-{/* Add any project-specific style rules below */}
+Use MDX title and description front matter, sentence-case headings, concise steps, expected results, failure paths, and root-relative internal links. Keep navigation in docs.json complete. Prefer native Mintlify components. Use the installed Mintlify skill for configuration and component guidance. Use MCP when it has access to this deployment; otherwise use the authorized local Git workflow. Do not edit unrelated Mintlify sites to work around missing connector access.
 
-- Use active voice and second person ("you")
-- Keep sentences concise — one idea per sentence
-- Use sentence case for headings
-- Bold for UI elements: Click **Settings**
-- Code formatting for file names, commands, paths, and code references
-
-## Content boundaries
-
-{/* Define what should and shouldn't be documented */}
-{/* Example: Don't document internal admin features */}
+Run mint validate and mint broken-links, inspect representative desktop/mobile pages, and verify production after publishing. Do not claim a mocked test proves a live external integration. Keep source-derived API schema references synchronized with the documented revision.

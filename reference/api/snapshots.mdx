@@ -1,0 +1,59 @@
+---
+title: "snapshots procedures"
+description: "Source input schemas, access wrappers, and handler links for snapshots."
+---
+
+These entries are extracted from the source, not hand-invented endpoint examples. Read [API conventions](/reference/api-overview) before calling them.
+
+## snapshots.create
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/snapshots.ts#L13).
+
+```typescript
+z.object({
+        siteId: z.number(),
+        postId: z.number().optional(),
+        postPath: z.string().optional(),
+        label: z.string(),
+        reason: z
+          .enum([
+            "manual",
+            "autosave",
+            "before-ai",
+            "before-publish",
+            "before-theme",
+            "before-plugin",
+          ])
+          .default("manual"),
+        markdown: z.string().optional(),
+        frontMatter: z.record(z.string(), z.unknown()).optional(),
+      })
+```
+
+## snapshots.listByPost
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/snapshots.ts#L50).
+
+```typescript
+z.object({ postPath: z.string(), siteId: z.number() })
+```
+
+## snapshots.get
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/snapshots.ts#L56).
+
+```typescript
+z.object({ id: z.number() })
+```
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers/snapshots.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/snapshots.ts).

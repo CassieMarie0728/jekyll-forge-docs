@@ -1,0 +1,38 @@
+---
+title: "Internal API reference"
+description: "Read the actual tRPC procedure schemas without inventing a REST API."
+---
+
+Forge uses tRPC with SuperJSON serialization. The active endpoint prefix is `/api/trpc`. Prefer the typed application client when developing against this code; these are internal procedures and can change with the application revision.
+
+## Authentication and serialization
+
+`publicProcedure` does not itself require a signed-in user. `protectedProcedure` requires one. `adminProcedure` adds the administrator requirement. Individual handlers apply additional ownership and input checks.
+
+The browser uses the application's session mechanism. Native authentication uses a single-use mobile code exchange. Do not put session tokens in query strings or documentation examples.
+
+Dates and other serialized types use the configured SuperJSON transformer. A pasted ordinary JSON object is not automatically a valid tRPC wire request. The following procedure pages show source input schemas, not fabricated `curl` recipes.
+
+## Non-tRPC routes
+
+| Route | Purpose |
+| --- | --- |
+| `/api/health` | Basic Worker availability response |
+| `/api/oauth/start` | Start browser GitHub sign-in |
+| `/api/oauth/callback` | Complete the configured OAuth callback |
+| `/api/assets/:id` | Authenticated repository asset preview |
+| `/api/trpc/*` | Application procedures |
+
+The Worker rejects mismatched Origin headers, requires JSON for POST requests, caps streamed request bodies at 8 MiB, and applies persisted request windows: 20 authentication requests or 200 other API requests per IP per minute. Health is handled before those checks.
+
+## Reading the generated catalog
+
+Each entry includes its procedure name, query/mutation classification, access wrapper, source line, and exact input schema from the documented revision. A mutation may write application data, GitHub content, or an external platform; read its linked handler before using it.
+
+Input schemas are not complete behavioral specifications. Output shapes, ownership checks, upstream failures, and side effects live in the handler. Reference links deliberately point to an immutable revision.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/worker.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/worker.ts), [server/routers.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers.ts), [server/_core/trpc.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/_core/trpc.ts).

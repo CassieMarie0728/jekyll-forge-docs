@@ -1,0 +1,38 @@
+---
+title: "Scheduled publication"
+description: "Queue a new post, understand the five-minute worker, and recover from ambiguous results."
+---
+
+Scheduling queues a server-side job. Your laptop can be off. Your GitHub token, repository access, destination, and hosting quotas still need to work at publication time.
+
+## Before scheduling
+
+Save your draft. Choose a future date and time, check the timezone, and verify both the draft path and target path. They must differ. The selected branch is recorded with the scheduled job.
+
+Scheduling creates a new published file. It refuses to overwrite an existing destination. Use a reviewed direct edit for updates to already-published posts.
+
+## Timing is approximate
+
+The Cloudflare cron trigger runs every five minutes. Each invocation processes at most two blog jobs and two social jobs. A queue backlog or upstream failure can delay work. “Scheduled for 10:00” is not a hard real-time delivery guarantee.
+
+The worker claims jobs atomically to reduce duplicate processing by concurrent workers. Remote APIs and network failures still make the result of some interrupted writes ambiguous.
+
+## Change or cancel a job
+
+Open the scheduler and refresh its state. Pending jobs can be rescheduled or cancelled. If a job has already been claimed, completed, or failed, do not assume a cancellation button can recall a GitHub commit.
+
+## A post did not appear
+
+1. Inspect the job state and error message.
+2. Confirm the target date is in the expected timezone and allow for the cron interval and backlog.
+3. Check GitHub for the target file and a matching commit before retrying.
+4. If the file exists, inspect the website build instead of queueing another copy.
+5. If it does not, check token validity, branch existence, and path conflicts.
+
+Social scheduling has separate platform limitations. Read [Social and mobile boundaries](/guides/social-and-mobile) before relying on it.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers/scheduler.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/scheduler.ts), [server/scheduledPublishHandler.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/scheduledPublishHandler.ts), [server/worker.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/worker.ts).

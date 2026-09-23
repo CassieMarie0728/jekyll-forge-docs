@@ -1,0 +1,47 @@
+---
+title: "Optional AI and your own keys"
+description: "Configure or replace a provider key, choose a model, and keep the final editorial decision."
+---
+
+AI is optional. You can write, save, preview, and publish without buying an API subscription. If you use AI, Forge sends content needed for the requested task to your selected provider.
+
+## Configure or switch a provider
+
+1. After sign-in, open **AI Settings** for your workspace.
+2. Select a supported provider and model.
+3. Read the displayed account and data-use disclosure.
+4. Enter your key in the credential field and save it. Saving validates the key and activates that provider.
+5. To change providers later, configure and activate the replacement. To replace a key, save the new key for that provider.
+6. Use the test controls, then try a small writing request and review its result.
+
+The key-validation operation is not proof that every model can complete a generation under your account's current quota. A provider can accept credentials while rejecting a subsequent model request.
+
+## Supported choices
+
+The application catalog includes OpenRouter, Gemini, Groq, and Mistral. See the exact [model catalog and application limits](/reference/ai-catalog). These are the models the app allows at the documented revision; provider availability can change independently.
+
+**Mistral is available.** It uses your own account and key. A paid-enabled account can incur charges. Forge does not automatically switch providers or promise that heavy usage will stay free. Your experience of not being charged is not a universal billing contract.
+
+## What the app's limits mean
+
+Forge limits requests per user and provider using database-backed windows. Those counters are not monetary spending caps. Provider account limits, policies, billing, and model availability remain separate.
+
+The supported generation path caps output at 1,024 tokens. A long draft can require smaller requests or continuation. Review the result for omissions rather than assuming a truncated answer is a complete post.
+
+## Writing settings
+
+Set your default tone, content language, and custom instructions. Language preferences apply to generated prose while structured keys and code retain their required formats. Pre-rewrite snapshots are always on in the current UI.
+
+AI can help with titles, outlines, drafts, continuations, FAQs, edits, and metadata. Treat suggestions as drafts. Check quotations, facts, links, and claims before publication. The model does not become your source merely because it sounds annoyingly confident.
+
+## Privacy and keys
+
+Saved AI keys are encrypted by the application using a key derived from `JWT_SECRET`. This does not make generated content end-to-end encrypted from the operator or provider. Do not submit confidential material unless the provider and account policy fit your requirements.
+
+Removing a saved provider in Forge is not the same as revoking the key at the provider. Revoke a compromised key at its source, replace it in Forge, and review provider usage.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/ai/freeProvider.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/ai/freeProvider.ts), [server/routers/aiProviders.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/aiProviders.ts), [client/src/pages/AISettings.tsx](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/pages/AISettings.tsx), [server/routers/ai.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/ai.ts).

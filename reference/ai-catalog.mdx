@@ -1,0 +1,34 @@
+---
+title: "AI models and application limits"
+description: "The allowlist implemented in Forge, distinct from live provider pricing or availability."
+---
+
+This table is a snapshot of Forge's source catalog. It is not a current pricing sheet or a guarantee that an upstream model remains available. Check the provider account and the live **AI Settings** screen before use.
+
+| Provider | Allowed model IDs in the catalog | App requests/minute | App requests/day |
+| --- | --- | --- | --- |
+| OpenRouter | `openrouter/free`; supported model identifiers ending in `:free` | 10 | 40 |
+| Gemini | `gemini-2.5-flash`, `gemini-2.5-flash-lite` | 5 | 100 |
+| Groq | `llama-3.1-8b-instant`, `llama-3.3-70b-versatile`, `openai/gpt-oss-20b`, `openai/gpt-oss-120b` | 10 | 200 |
+| Mistral | `mistral-small-latest`, `mistral-large-latest` | 5 | 100 |
+
+The generation path limits output to 1,024 tokens. Counters persist through D1 across Worker instances. App limits are separate from provider quotas and do not cap monetary spending.
+
+## Provider account links
+
+- [OpenRouter keys](https://openrouter.ai/keys)
+- [Google AI Studio keys](https://aistudio.google.com/app/apikey)
+- [Groq keys](https://console.groq.com/keys)
+- [Mistral keys](https://console.mistral.ai/api-keys/)
+
+The app's Gemini disclosure warns about free-tier data use. Read the current provider terms for your account before sending sensitive content. Mistral is optional and may bill according to the account's settings. Forge never automatically switches providers.
+
+## Unsupported models
+
+Do not edit browser requests to bypass the catalog. Server validation rejects unsupported provider/model combinations. To add a provider properly, review its endpoint, authentication, billing disclosure, data handling, model validation, errors, limits, and tests in the application source.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/ai/freeProvider.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/ai/freeProvider.ts), [server/routers/aiProviders.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/aiProviders.ts).

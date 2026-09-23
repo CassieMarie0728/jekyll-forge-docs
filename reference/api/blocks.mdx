@@ -1,0 +1,61 @@
+---
+title: "blocks procedures"
+description: "Source input schemas, access wrappers, and handler links for blocks."
+---
+
+These entries are extracted from the source, not hand-invented endpoint examples. Read [API conventions](/reference/api-overview) before calling them.
+
+## blocks.list
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/blocks.ts#L11).
+
+No input schema is declared for this procedure.
+
+## blocks.create
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/blocks.ts#L13).
+
+```typescript
+z.object({
+        name: z.string().min(1),
+        category: z.string().optional(),
+        content: z.string().min(1),
+        contentType: z.enum(["markdown", "html", "liquid"]).default("markdown"),
+      })
+```
+
+## blocks.update
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/blocks.ts#L26).
+
+```typescript
+z.object({
+        id: z.number(),
+        name: z.string().optional(),
+        category: z.string().optional(),
+        content: z.string().optional(),
+        contentType: z.enum(["markdown", "html", "liquid"]).optional(),
+      })
+```
+
+## blocks.delete
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/blocks.ts#L41).
+
+```typescript
+z.object({ id: z.number() })
+```
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers/blocks.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/blocks.ts).

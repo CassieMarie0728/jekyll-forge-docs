@@ -1,0 +1,70 @@
+---
+title: "aiProviders procedures"
+description: "Source input schemas, access wrappers, and handler links for aiProviders."
+---
+
+These entries are extracted from the source, not hand-invented endpoint examples. Read [API conventions](/reference/api-overview) before calling them.
+
+## aiProviders.getSettings
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/aiProviders.ts#L68).
+
+No input schema is declared for this procedure.
+
+## aiProviders.save
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/aiProviders.ts#L73).
+
+```typescript
+z.object({
+        provider: providerSchema,
+        model: z.string().min(1).max(160),
+        apiKey: z.string().trim().min(8).max(1024),
+        // Retain the wire name for existing clients; acknowledges the displayed account billing policy.
+        acknowledgeFreeTier: z.literal(true),
+      })
+```
+
+## aiProviders.test
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/aiProviders.ts#L100).
+
+```typescript
+z.object({
+        provider: providerSchema,
+        model: z.string().min(1).max(160),
+        apiKey: z.string().trim().min(8).max(1024),
+      })
+```
+
+## aiProviders.activate
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/aiProviders.ts#L114).
+
+```typescript
+z.object({ provider: providerSchema })
+```
+
+## aiProviders.remove
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/aiProviders.ts#L130).
+
+```typescript
+z.object({ provider: providerSchema })
+```
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers/aiProviders.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/aiProviders.ts).

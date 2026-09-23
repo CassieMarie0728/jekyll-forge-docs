@@ -1,0 +1,33 @@
+---
+title: "Glossary"
+description: "Names that should mean one thing, even when the internet gets creative."
+---
+
+| Term | Meaning |
+| --- | --- |
+| Workspace / site | A Forge record for a repository, branch, root, and preferences |
+| Repository | The GitHub project containing files and history |
+| Branch | A line of Git history; publication depends on which branch the site builds |
+| Root path | The directory within the repository containing the Jekyll site |
+| Base URL / baseurl | Jekyll's public URL prefix; not the repository root path |
+| Front matter | YAML metadata at the start of a Markdown file |
+| Forge draft | A post saved in the application database |
+| Recovery copy | Browser-local rescue data for editor content |
+| Snapshot | An application revision record |
+| SHA | Git's identifier used to identify a reviewed file version |
+| Diff | Added and removed lines between two versions |
+| Publish | Write content to the selected GitHub destination |
+| Deploy | Build and serve code or website content on hosting infrastructure |
+| OAuth | The authorization flow used for Forge sign-in |
+| PAT | Personal Access Token used for repository operations |
+| D1 | The Cloudflare SQLite database used by Forge |
+| Worker | The Cloudflare server runtime |
+| tRPC | The typed application procedure API |
+
+A successful publish can be followed by a failed website deployment. A saved draft can exist without a GitHub file. Keep those distinctions and half the troubleshooting gets less stupid immediately.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers.ts), [drizzle/schema.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/drizzle/schema.ts).

@@ -1,0 +1,107 @@
+---
+title: "scheduler procedures"
+description: "Source input schemas, access wrappers, and handler links for scheduler."
+---
+
+These entries are extracted from the source, not hand-invented endpoint examples. Read [API conventions](/reference/api-overview) before calling them.
+
+## scheduler.list
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/scheduler.ts#L32).
+
+```typescript
+z.object({ siteId: z.number() })
+```
+
+## scheduler.schedule
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/scheduler.ts#L37).
+
+```typescript
+z.object({
+        siteId: z.number(),
+        postId: z.number().optional(),
+        draftPath: z.string(),
+        targetPath: z.string(),
+        scheduledAt: z.date(),
+        timezone: z.string().default("UTC"),
+        commitMessage: z.string().optional(),
+      })
+```
+
+## scheduler.cancel
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/scheduler.ts#L75).
+
+```typescript
+z.object({ id: z.number() })
+```
+
+## scheduler.reschedule
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/scheduler.ts#L95).
+
+```typescript
+z.object({
+        id: z.number(),
+        scheduledAt: z.date(),
+        timezone: z.string().optional(),
+      })
+```
+
+## scheduler.cancelAll
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/scheduler.ts#L130).
+
+```typescript
+z.object({ siteId: z.number() })
+```
+
+## scheduler.listHeartbeatJobs
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/scheduler.ts#L148).
+
+```typescript
+z.object({
+        page: z.number().default(1),
+        pageSize: z.number().default(20),
+      })
+```
+
+## scheduler.markPublished
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/scheduler.ts#L179).
+
+```typescript
+z.object({ id: z.number() })
+```
+
+## scheduler.markFailed
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/scheduler.ts#L189).
+
+```typescript
+z.object({ id: z.number(), errorMessage: z.string().max(2000) })
+```
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers/scheduler.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/scheduler.ts).

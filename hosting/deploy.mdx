@@ -1,0 +1,62 @@
+---
+title: "Deploy your own Forge"
+description: "Set up a dedicated Cloudflare Worker and D1 database with GitHub OAuth."
+---
+
+You need a Cloudflare account, a GitHub account that can register an OAuth app, and the app checkout described in [Local development](/hosting/local-development). Decide your final HTTPS app origin before creating the production OAuth configuration.
+
+## 1. Choose the account and database
+
+```bash
+pnpm exec wrangler login
+pnpm exec wrangler d1 create jekyll-forge
+```
+
+Check the actual account plan and quotas in Cloudflare. These instructions do not enable a paid plan. Free-tier availability and limits are controlled by Cloudflare, and finite quotas are not unlimited hosting.
+
+Put the new database ID in `wrangler.jsonc`, keep the binding named `DB`, and verify it belongs to this deployment. Do not reuse another application's database or copy the original operator's ID as your own.
+
+## 2. Register GitHub OAuth
+
+Set `APP_URL` to the final HTTPS origin. Register a GitHub OAuth app with that homepage and callback `APP_URL/api/oauth/callback`. Set the public `GITHUB_CLIENT_ID` and the owner's numeric `OWNER_GITHUB_ID` in the Worker variables.
+
+Enter secrets through interactive prompts:
+
+```bash
+pnpm exec wrangler secret put GITHUB_CLIENT_SECRET
+pnpm exec wrangler secret put JWT_SECRET
+```
+
+Use a strong random production JWT secret and preserve it securely. It signs sessions and derives the encryption key for saved AI credentials. Casual rotation can strand existing encrypted keys and invalidate sessions.
+
+## 3. Validate and migrate
+
+```bash
+pnpm cf:types
+pnpm check
+pnpm test
+pnpm cf:check
+```
+
+Verify the account and database target again before the remote migration:
+
+```bash
+pnpm db:remote
+pnpm cf:deploy
+```
+
+The current SQLite migrations live under `drizzle/d1`. Historical MySQL migrations are not the active migration path. Back up an existing deployment before changing its schema.
+
+## 4. Accept the deployment
+
+Check the homepage, `/api/health`, sign-in and sign-out, workspace selection, draft save/reopen, and denied access while signed out. Then use a deliberately selected test repository for an image upload, reviewed publish, and scheduled creation.
+
+Record the deployed version, test destination, results, and unresolved issues. A successful upload only proves that Cloudflare accepted a bundle. It does not prove your token can publish a post.
+
+The existing hosted app is [jekyll-forge.c728.workers.dev](https://jekyll-forge.c728.workers.dev). Your deployment must use your own account, database, origin, OAuth app, and secrets.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[wrangler.jsonc](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/wrangler.jsonc), [scripts/check-deployment.mjs](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/scripts/check-deployment.mjs), [server/_core/oauth.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/_core/oauth.ts), [package.json](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/package.json).

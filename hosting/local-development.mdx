@@ -1,0 +1,46 @@
+---
+title: "Run Forge locally"
+description: "Use the repository runtime and a local database before touching production."
+---
+
+Use Node 24 and the repository's pinned pnpm 10.4.1. Check out the documented application revision or an intentionally chosen newer revision. The migration branch contains the active Cloudflare runtime; do not assume historical default-branch setup matches this manual.
+
+```bash
+git clone https://github.com/CassieMarie0728/jekyll-forge.git
+cd jekyll-forge
+git checkout c889b55402f374d832b2412d9ce1a32c5fae06a7
+npx pnpm@10.4.1 install --frozen-lockfile
+```
+
+The pinned checkout is detached for reproducibility. Create your own development branch before committing changes.
+
+Copy `.dev.vars.example` to `.dev.vars`. Supply a cryptographically random `JWT_SECRET` of at least 32 characters and configure the environment for your local origin. Never commit `.dev.vars` or paste its contents into an issue.
+
+```bash
+npx pnpm@10.4.1 db:local
+npx pnpm@10.4.1 dev
+```
+
+Open `http://localhost:8787`. The development script builds the client and starts Wrangler. For faster UI changes, run `pnpm dev:ui` separately; it proxies API requests to port 8787.
+
+## Local OAuth
+
+Use a separate GitHub OAuth app for local sign-in. Its callback must match the local API origin and `/api/oauth/callback`. Use port 8787 for callback testing so cookies and redirects stay on the configured origin. Without login configuration, `/api/oauth/start` returns 503.
+
+Local database/API tests do not require real GitHub credentials. Mocked GitHub responses must remain described as mocks.
+
+## Validation
+
+```bash
+pnpm check
+pnpm test
+pnpm cf:check
+```
+
+`cf:check` builds and performs a deployment dry run; it does not publish production or prove real upstream access. Existing large-bundle warnings are a performance follow-up, not proof of a failed build.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[package.json](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/package.json), [.dev.vars.example](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/.dev.vars.example), [vite.config.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/vite.config.ts), [scripts/check-deployment.mjs](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/scripts/check-deployment.mjs).

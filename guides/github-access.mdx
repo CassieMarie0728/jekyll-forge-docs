@@ -1,0 +1,54 @@
+---
+title: "GitHub access and missing repositories"
+description: "Separate Forge sign-in from repository access, connect the intended account, and diagnose repos that refuse to show up."
+---
+
+Forge uses GitHub twice: once to identify you, and again to access repository content. Those are separate connections. One successful login does not automatically grant the other every permission under the sun.
+
+## The two connections
+
+| Connection | Purpose | Credential |
+| --- | --- | --- |
+| Sign in to Forge | Establish your Forge session | GitHub OAuth flow |
+| Connect repository access | Read and write the repositories you choose | A GitHub Personal Access Token |
+
+The OAuth login token is not saved as your repository credential. Repository operations use the separately connected token. Changing the OAuth application's repository settings is therefore not a universal fix for a missing blog.
+
+## Connect the intended repositories
+
+1. Sign in to Forge.
+2. Use the repository connection controls to provide your GitHub token.
+3. Confirm the connected GitHub login is the account that should access the blog.
+4. Give the token access to the intended repositories and the operations you need. Writing content and opening pull requests require corresponding GitHub permissions.
+5. Search the repository picker by repository name and allow additional result pages to load.
+6. Choose the correct branch and site root.
+
+Use GitHub's current [Personal Access Token guidance](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens). Organization approval, SSO authorization, token expiration, and repository policies can still restrict access.
+
+Never paste a token into a GitHub issue, screenshot, URL, or chat message. Enter it only into the intended credential field.
+
+## A repository is missing
+
+Check these in order:
+
+1. **Account:** does the connected token belong to the intended GitHub identity?
+2. **Token access:** does that specific token include this repository? An “all repositories” choice on a different GitHub app does not change this token.
+3. **Organization rules:** does the organization require approval or SSO authorization?
+4. **Expiration:** is the token still valid?
+5. **Pagination:** has Forge loaded additional repository pages?
+6. **Branch and root:** did you enter the correct workspace after finding the repo?
+
+A repository can contain a Jekyll site below its root. A missing root-level `_config.yml` does not prove your blog vanished.
+
+## Error meanings
+
+| Response | What to inspect |
+| --- | --- |
+| 401 | Invalid, expired, or missing authorization; reconnect the credential |
+| 403 | Repository permissions, organization restrictions, or denied operation |
+| 404 | Wrong path/branch, deleted resource, or private content unavailable to this token |
+| 409 / 422 | Conflicting destination, changed file, or invalid branch/path; refresh the review |
+
+Forge treats a missing post folder as empty only after verifying repository and branch access. A permission error should remain visible instead of masquerading as an empty blog.
+
+**Evidence:** [GitHub router](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts), source-reviewed September 20, 2026.

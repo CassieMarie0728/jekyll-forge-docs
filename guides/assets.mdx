@@ -1,0 +1,37 @@
+---
+title: "Images and assets"
+description: "Upload repository-backed files, write honest alt text, and avoid broken published image URLs."
+---
+
+Uploads create files in the selected GitHub repository and branch, under the configured asset directory and site root. They are repository writes, not private scratch uploads.
+
+## Upload safely
+
+1. Confirm the workspace, branch, root, and asset directory.
+2. Select an appropriate image. The upload limit is 5 MB; supported still images can be optimized in the browser.
+3. Review the result and save meaningful alt text.
+4. Insert the repository asset path into the post and inspect the published Jekyll page after deployment.
+
+Existing files are not overwritten by uploads. Re-optimizing an existing file requires a new upload rather than an in-place replacement.
+
+## Alt text should describe the image
+
+Write the information a reader needs from the picture. An AI suggestion based on the filename has not actually looked at the image. Correct it before treating it as an accessibility description. Manual changes have an explicit **Save** action.
+
+## Private previews and public paths
+
+Private asset previews go through an authenticated Forge endpoint. That URL is not the image address to embed in your public Markdown. Published content should use the repository's site-relative asset path.
+
+For a Jekyll project site with a `baseurl`, apply your theme's URL convention. For example, a theme may use Jekyll's `relative_url` filter. Verify the generated HTML rather than assuming a root-relative path works on every deployment.
+
+## Removing an asset-library entry
+
+Removing an entry from Forge's asset library preserves the GitHub file. If you intentionally want the repository file deleted, review that as a separate GitHub change and check existing posts that reference it.
+
+Large files, unsupported content, a denied GitHub write, or a wrong branch can cause failures. Preserve the original file and inspect the error before repeatedly uploading duplicates.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers/assets.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/assets.ts), [server/storage.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/storage.ts), [server/_core/repositoryAsset.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/_core/repositoryAsset.ts), [client/src/lib/optimizeUpload.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/lib/optimizeUpload.ts), [client/src/pages/AssetManager.tsx](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/pages/AssetManager.tsx).

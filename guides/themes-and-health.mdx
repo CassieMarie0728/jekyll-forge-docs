@@ -1,0 +1,32 @@
+---
+title: "Themes, plugins, and site health"
+description: "Edit Jekyll configuration without confusing a settings change with a finished installation."
+---
+
+Forge can read and edit theme and plugin configuration for the selected branch and site root. It cannot guarantee that every theme works after changing one YAML field.
+
+## Before applying a theme
+
+Preserve the current `_config.yml` and review the theme's actual installation instructions. Check its layout names, assets, required gems, supported plugins, and hosting method. Theme catalog popularity values are not live GitHub statistics.
+
+Forge recognizes `remote_theme` and validates theme identifiers. Selecting a gem theme clears a stale remote-theme setting. Configuration changes are unavailable when the current config cannot be loaded safely.
+
+## YAML is data, not a mood
+
+Malformed existing configuration is rejected. Plugin changes parse and serialize YAML, preserving nested data while normalizing formatting. Comments are not retained by that serializer. Move essential explanations to a maintained document or preserve them before applying the edit.
+
+Adding a plugin name to `_config.yml` does not install its gem. Some hosting modes support only particular plugins; custom GitHub Actions builds can have different dependencies. Inspect the build log and theme requirements.
+
+## Read health results in context
+
+Site Health reports setup checks, with some content checks scoped to Forge-tracked data. It is not an exhaustive SEO audit, accessibility audit, or proof that every repository page is valid.
+
+If GitHub Pages reports a failure, open the actual failed workflow. Fix the first meaningful build error, such as malformed YAML or a missing dependency. Do not switch themes repeatedly to treat an indentation error.
+
+After a config change, inspect the GitHub diff, wait for the correct branch's build, and review the deployed site. Keep a clear route back to the previous working commit.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers/github.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts), [client/src/pages/ThemeManager.tsx](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/pages/ThemeManager.tsx), [client/src/pages/SiteHealth.tsx](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/pages/SiteHealth.tsx).

@@ -1,0 +1,297 @@
+---
+title: "github procedures"
+description: "Source input schemas, access wrappers, and handler links for github."
+---
+
+These entries are extracted from the source, not hand-invented endpoint examples. Read [API conventions](/reference/api-overview) before calling them.
+
+## github.connect
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L109).
+
+```typescript
+z.object({ token: z.string().min(1) })
+```
+
+## github.disconnect
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L132).
+
+No input schema is declared for this procedure.
+
+## github.status
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L143).
+
+No input schema is declared for this procedure.
+
+## github.repositories
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L154).
+
+```typescript
+z.object({ cursor: z.number().int().min(1).nullish() })
+```
+
+## github.listRepos
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L166).
+
+```typescript
+z.object({
+        page: z.number().default(1),
+        perPage: z.number().default(30),
+        search: z.string().optional(),
+      })
+```
+
+## github.detectJekyll
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L193).
+
+```typescript
+z.object({
+        owner: z.string(),
+        repo: z.string(),
+        branch: z.string().default("main"),
+        rootPath: z.string().default(""),
+      })
+```
+
+## github.listBranches
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L298).
+
+```typescript
+z.object({ owner: z.string(), repo: z.string() })
+```
+
+## github.createBranch
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L308).
+
+```typescript
+z.object({
+        owner: z.string(),
+        repo: z.string(),
+        branchName: z.string(),
+        fromBranch: z.string(),
+      })
+```
+
+## github.listFiles
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L332).
+
+```typescript
+z.object({
+        owner: z.string(),
+        repo: z.string(),
+        path: z.string().default(""),
+        branch: z.string().default("main"),
+      })
+```
+
+## github.getFile
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L368).
+
+```typescript
+z.object({
+        owner: z.string(),
+        repo: z.string(),
+        path: z.string(),
+        branch: z.string().default("main"),
+      })
+```
+
+## github.inventory
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L387).
+
+```typescript
+z.object({ owner: z.string(), repo: z.string(), branch: z.string() })
+```
+
+## github.reviewFile
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L408).
+
+```typescript
+z.object({
+        owner: z.string(),
+        repo: z.string(),
+        path: z.string(),
+        branch: z.string(),
+      })
+```
+
+## github.commitFile
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L444).
+
+```typescript
+z.object({
+        owner: z.string(),
+        repo: z.string(),
+        path: z.string(),
+        branch: z.string(),
+        content: z.string(),
+        message: z.string(),
+        sha: z.string().optional(),
+      })
+```
+
+## github.deleteFile
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L475).
+
+```typescript
+z.object({
+        owner: z.string(),
+        repo: z.string(),
+        path: z.string(),
+        branch: z.string(),
+        sha: z.string(),
+        message: z.string(),
+      })
+```
+
+## github.createPullRequest
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L502).
+
+```typescript
+z.object({
+        owner: z.string(),
+        repo: z.string(),
+        title: z.string(),
+        head: z.string(),
+        base: z.string(),
+        body: z.string().optional(),
+      })
+```
+
+## github.getRateLimit
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L530).
+
+No input schema is declared for this procedure.
+
+## github.getPagesStatus
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L537).
+
+```typescript
+z.object({ owner: z.string(), repo: z.string() })
+```
+
+## github.checkPluginCompatibility
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L551).
+
+```typescript
+z.object({ plugin: z.string() })
+```
+
+## github.updateJekyllConfig
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L570).
+
+```typescript
+z.object({
+        owner: z.string(),
+        repo: z.string(),
+        rootPath: z.string().default(""),
+        branch: z.string().default("main"),
+        /** Set a new theme */
+        theme: z
+          .string()
+          .regex(/^[a-zA-Z0-9][a-zA-Z0-9_-]*$/)
+          .optional(),
+        /** Add a plugin (appended to plugins list) */
+        addPlugin: z
+          .string()
+          .regex(/^[a-zA-Z0-9][a-zA-Z0-9_-]*$/)
+          .optional(),
+        /** Remove a plugin */
+        removePlugin: z
+          .string()
+          .regex(/^[a-zA-Z0-9][a-zA-Z0-9_-]*$/)
+          .optional(),
+        commitMessage: z.string().optional(),
+      })
+```
+
+## github.getJekyllConfig
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L701).
+
+```typescript
+z.object({
+        owner: z.string(),
+        repo: z.string(),
+        rootPath: z.string().default(""),
+        branch: z.string().default("main"),
+      })
+```
+
+## github.generateActionsWorkflow
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts#L747).
+
+```typescript
+z.object({
+        owner: z.string(),
+        repo: z.string(),
+        branch: z.string().default("main"),
+      })
+```
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers/github.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/github.ts).

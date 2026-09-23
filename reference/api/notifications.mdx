@@ -1,0 +1,35 @@
+---
+title: "notifications procedures"
+description: "Source input schemas, access wrappers, and handler links for notifications."
+---
+
+These entries are extracted from the source, not hand-invented endpoint examples. Read [API conventions](/reference/api-overview) before calling them.
+
+## notifications.registerDevice
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/notifications.ts#L6).
+
+```typescript
+z.object({
+        token: z.string().min(1).max(512),
+        platform: z.enum(["android"]).default("android"),
+      })
+```
+
+## notifications.unregisterDevice
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/notifications.ts#L18).
+
+```typescript
+z.object({ token: z.string().min(1).max(512) })
+```
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers/notifications.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/notifications.ts).

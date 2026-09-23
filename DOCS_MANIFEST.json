@@ -1,0 +1,286 @@
+{
+  "sourceRevision": "c889b55402f374d832b2412d9ce1a32c5fae06a7",
+  "reviewedAt": "2026-09-20",
+  "pages": {
+    "index": {
+      "title": "The Forge field manual",
+      "sources": [
+        "server/worker.ts",
+        "client/src/App.tsx"
+      ]
+    },
+    "quickstart": {
+      "title": "Your first saved draft",
+      "sources": [
+        "client/src/pages/RepoPicker.tsx",
+        "client/src/pages/Editor.tsx",
+        "server/routers/posts.ts"
+      ]
+    },
+    "guides/editor": {
+      "title": "Markdown, front matter, and preview",
+      "sources": [
+        "client/src/pages/Editor.tsx",
+        "client/src/lib/editorMarkdown.ts",
+        "client/src/components/FrontMatterEditor.tsx"
+      ]
+    },
+    "guides/workspaces": {
+      "title": "Workspaces, branches, and repository files",
+      "sources": [
+        "client/src/pages/RepositoryInventory.tsx",
+        "client/src/pages/Dashboard.tsx",
+        "server/routers/sites.ts",
+        "server/routers/github.ts"
+      ]
+    },
+    "guides/scheduling": {
+      "title": "Scheduled publication",
+      "sources": [
+        "server/routers/scheduler.ts",
+        "server/scheduledPublishHandler.ts",
+        "server/worker.ts"
+      ]
+    },
+    "guides/assets": {
+      "title": "Images and assets",
+      "sources": [
+        "server/routers/assets.ts",
+        "server/storage.ts",
+        "server/_core/repositoryAsset.ts",
+        "client/src/lib/optimizeUpload.ts",
+        "client/src/pages/AssetManager.tsx"
+      ]
+    },
+    "guides/ai": {
+      "title": "Optional AI and your own keys",
+      "sources": [
+        "server/ai/freeProvider.ts",
+        "server/routers/aiProviders.ts",
+        "client/src/pages/AISettings.tsx",
+        "server/routers/ai.ts"
+      ]
+    },
+    "guides/deadpool-cool": {
+      "title": "Deadpool-cool, with standards",
+      "sources": [
+        "shared/writingTones.ts",
+        "client/src/components/AIAssistant.tsx",
+        "client/src/pages/AISettings.tsx"
+      ]
+    },
+    "guides/themes-and-health": {
+      "title": "Themes, plugins, and site health",
+      "sources": [
+        "server/routers/github.ts",
+        "client/src/pages/ThemeManager.tsx",
+        "client/src/pages/SiteHealth.tsx"
+      ]
+    },
+    "guides/display-mode": {
+      "title": "Desktop mode on a phone",
+      "sources": [
+        "client/src/lib/displayMode.ts",
+        "client/src/pages/UserSettings.tsx",
+        "client/src/pages/Editor.tsx"
+      ]
+    },
+    "guides/social-and-mobile": {
+      "title": "Social and mobile: the fine print",
+      "sources": [
+        "server/routers/socialMedia.ts",
+        "server/_core/scheduledSocialPostsHandler.ts",
+        "server/routers/repurposing.ts",
+        "shared/mobileApi.ts"
+      ]
+    },
+    "troubleshooting/common-problems": {
+      "title": "When something breaks",
+      "sources": [
+        "server/routers/github.ts",
+        "server/worker.ts",
+        "client/src/components/DraftRecovery.tsx"
+      ]
+    },
+    "hosting/architecture": {
+      "title": "How Forge runs",
+      "sources": [
+        "server/worker.ts",
+        "server/routers.ts",
+        "server/_core/context.ts",
+        "wrangler.jsonc"
+      ]
+    },
+    "hosting/local-development": {
+      "title": "Run Forge locally",
+      "sources": [
+        "package.json",
+        ".dev.vars.example",
+        "vite.config.ts",
+        "scripts/check-deployment.mjs"
+      ]
+    },
+    "hosting/deploy": {
+      "title": "Deploy your own Forge",
+      "sources": [
+        "wrangler.jsonc",
+        "scripts/check-deployment.mjs",
+        "server/_core/oauth.ts",
+        "package.json"
+      ]
+    },
+    "hosting/security-and-backups": {
+      "title": "Secrets, backups, and rollback",
+      "sources": [
+        "server/ai/freeProvider.ts",
+        "server/routers/github.ts",
+        "drizzle/schema.ts",
+        "CLOUDFLARE_SETUP.md"
+      ]
+    },
+    "reference/current-state": {
+      "title": "Current state and evidence",
+      "sources": [
+        "FRONTEND_AUDIT_2026-09-20.md",
+        "server/worker.ts",
+        "landing/QA.md"
+      ]
+    },
+    "reference/api-overview": {
+      "title": "Internal API reference",
+      "sources": [
+        "server/worker.ts",
+        "server/routers.ts",
+        "server/_core/trpc.ts"
+      ]
+    },
+    "reference/api/auth": {
+      "title": "auth procedures",
+      "sources": [
+        "server/routers.ts"
+      ]
+    },
+    "reference/api/system": {
+      "title": "system procedures",
+      "sources": [
+        "server/_core/systemRouter.ts"
+      ]
+    },
+    "reference/api/ab-testing": {
+      "title": "abTesting procedures",
+      "sources": [
+        "server/routers/abTesting.ts"
+      ]
+    },
+    "reference/api/ai": {
+      "title": "ai procedures",
+      "sources": [
+        "server/routers/ai.ts"
+      ]
+    },
+    "reference/api/ai-providers": {
+      "title": "aiProviders procedures",
+      "sources": [
+        "server/routers/aiProviders.ts"
+      ]
+    },
+    "reference/api/assets": {
+      "title": "assets procedures",
+      "sources": [
+        "server/routers/assets.ts"
+      ]
+    },
+    "reference/api/blocks": {
+      "title": "blocks procedures",
+      "sources": [
+        "server/routers/blocks.ts"
+      ]
+    },
+    "reference/api/github": {
+      "title": "github procedures",
+      "sources": [
+        "server/routers/github.ts"
+      ]
+    },
+    "reference/api/notifications": {
+      "title": "notifications procedures",
+      "sources": [
+        "server/routers/notifications.ts"
+      ]
+    },
+    "reference/api/posts": {
+      "title": "posts procedures",
+      "sources": [
+        "server/routers/posts.ts"
+      ]
+    },
+    "reference/api/repurposing": {
+      "title": "repurposing procedures",
+      "sources": [
+        "server/routers/repurposing.ts"
+      ]
+    },
+    "reference/api/scheduler": {
+      "title": "scheduler procedures",
+      "sources": [
+        "server/routers/scheduler.ts"
+      ]
+    },
+    "reference/api/sites": {
+      "title": "sites procedures",
+      "sources": [
+        "server/routers/sites.ts"
+      ]
+    },
+    "reference/api/snapshots": {
+      "title": "snapshots procedures",
+      "sources": [
+        "server/routers/snapshots.ts"
+      ]
+    },
+    "reference/api/social-media": {
+      "title": "socialMedia procedures",
+      "sources": [
+        "server/routers/socialMedia.ts"
+      ]
+    },
+    "reference/data-model": {
+      "title": "Database model",
+      "sources": [
+        "drizzle/schema.ts",
+        "drizzle/d1/0000_massive_silver_sable.sql",
+        "drizzle/d1/0001_wonderful_blob.sql",
+        "drizzle/d1/0002_friendly_thaddeus_ross.sql",
+        "drizzle/d1/0003_puzzling_eternals.sql"
+      ]
+    },
+    "reference/ai-catalog": {
+      "title": "AI models and application limits",
+      "sources": [
+        "server/ai/freeProvider.ts",
+        "server/routers/aiProviders.ts"
+      ]
+    },
+    "reference/configuration": {
+      "title": "Configuration and commands",
+      "sources": [
+        "package.json",
+        "wrangler.jsonc",
+        "server/_core/runtime.ts",
+        "scripts/check-deployment.mjs"
+      ]
+    },
+    "reference/glossary": {
+      "title": "Glossary",
+      "sources": [
+        "server/routers.ts",
+        "drizzle/schema.ts"
+      ]
+    }
+  },
+  "preservedManualGuides": [
+    "guides/github-access",
+    "guides/drafts-and-recovery",
+    "guides/publishing"
+  ]
+}

@@ -1,0 +1,32 @@
+---
+title: "Social and mobile: the fine print"
+description: "Understand the implemented surfaces and the integrations that still need live acceptance."
+---
+
+Forge contains social account, repurposing, analytics, A/B-testing, and native-mobile code. Their presence in a menu or source tree does not establish that every external platform integration works in production.
+
+## Social content
+
+Repurposing can prepare platform-specific content and variations. Review each result for platform length, links, formatting, factual accuracy, and voice. Generating a caption is different from successfully delivering it to a platform.
+
+Live external social credentials and publishing have not been fully accepted in the Cloudflare migration. Scheduled Facebook and Instagram publishing lack a verified media/page integration and return failure rather than a fabricated success receipt. Twitter and LinkedIn access are not guaranteed to be free.
+
+Treat analytics and A/B results according to their actual collected data. Do not infer statistical confidence or external delivery from a generated variation. Inspect the [procedure reference](/reference/api-overview) for implementation details and required inputs.
+
+## Native mobile
+
+The source includes Expo/mobile support. Set `EXPO_PUBLIC_API_URL` to the intended HTTPS server and rebuild the native app when changing hosting. An already-installed Manus-era build does not automatically learn a new server address.
+
+Physical-device sign-in, deep links, offline replay, notification registration, and signed distribution require acceptance on the actual build. A responsive browser test is not a substitute for that work.
+
+## What is not claimed
+
+No guaranteed free access to every social API. No verified public app-store release in this manual. No guarantee of offline behavior for every mutation. No email or push delivery implied by an operator notification stored in D1.
+
+For an integration test, use an account and destination you explicitly intend to publish to. Record the external receipt and resulting content. A mocked test verifies a code path; it does not prove the platform accepted your post.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers/socialMedia.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/socialMedia.ts), [server/_core/scheduledSocialPostsHandler.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/_core/scheduledSocialPostsHandler.ts), [server/routers/repurposing.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/repurposing.ts), [shared/mobileApi.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/shared/mobileApi.ts).

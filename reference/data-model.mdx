@@ -1,0 +1,46 @@
+---
+title: "Database model"
+description: "The active SQLite schema and the difference between application records and GitHub files."
+---
+
+D1 stores the application's account, workspace, draft, integration, scheduling, and analytics state. Repository files remain in GitHub. Browser recovery remains in the browser.
+
+## Active tables
+
+- `users`
+- `mobileDeviceTokens`
+- `mobileAuthCodes`
+- `sites`
+- `posts`
+- `snapshots`
+- `assets`
+- `aiSettings`
+- `userAiProviders`
+- `scheduledPosts`
+- `reusableBlocks`
+- `frontMatterTemplates`
+- `repurposedContent`
+- `socialMediaAccounts`
+- `scheduledSocialPosts`
+- `contentAnalytics`
+- `contentVariations`
+- `abTestResults`
+- `abTestSummary`
+- `rateWindows`
+- `operatorNotifications`
+
+## Schema authority
+
+The linked Drizzle schema defines fields, types, defaults, and indexes. The SQLite SQL files in `drizzle/d1` define migration history. There are four migration files at this revision, numbered 0000 through 0003; do not reuse the older guide's initial three-migration count.
+
+User records and integration records contain sensitive data. Keep database exports private. The schema alone does not establish retention periods, backup frequency, or operational access controls; those policies are operator responsibilities.
+
+## Restore and migration boundaries
+
+Test restores against an isolated database. A source-code rollback is not a schema rollback. Preserve the database, secrets required to decrypt AI keys, and GitHub repository history as separate recovery inputs.
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[drizzle/schema.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/drizzle/schema.ts), [drizzle/d1/0000_massive_silver_sable.sql](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/drizzle/d1/0000_massive_silver_sable.sql), [drizzle/d1/0001_wonderful_blob.sql](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/drizzle/d1/0001_wonderful_blob.sql), [drizzle/d1/0002_friendly_thaddeus_ross.sql](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/drizzle/d1/0002_friendly_thaddeus_ross.sql), [drizzle/d1/0003_puzzling_eternals.sql](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/drizzle/d1/0003_puzzling_eternals.sql).

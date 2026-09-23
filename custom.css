@@ -1,0 +1,6 @@
+/* Keep the docs shell native; apply the established Forge typewriter brand. */
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+h1,h2,h3 { font-family: "Special Elite", "Courier New", monospace !important; }
+.prose { font-family: "Courier New", monospace; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto !important; } }

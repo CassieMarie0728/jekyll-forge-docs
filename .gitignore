@@ -1,0 +1,4 @@
+.agents/
+.mintlify/
+node_modules/
+*.log

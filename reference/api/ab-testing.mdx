@@ -1,0 +1,117 @@
+---
+title: "abTesting procedures"
+description: "Source input schemas, access wrappers, and handler links for abTesting."
+---
+
+These entries are extracted from the source, not hand-invented endpoint examples. Read [API conventions](/reference/api-overview) before calling them.
+
+## abTesting.generateVariations
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/abTesting.ts#L39).
+
+```typescript
+z.object({
+        postId: z.number(),
+        count: z.number().min(2).max(5).optional(),
+        tones: z.array(z.string()).optional(),
+        angles: z.array(z.string()).optional(),
+        headline: z.string(),
+        content: z.string(),
+      })
+```
+
+## abTesting.getVariations
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/abTesting.ts#L108).
+
+```typescript
+z.object({ postId: z.number() })
+```
+
+## abTesting.publishVariation
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/abTesting.ts#L131).
+
+```typescript
+z.object({
+        postId: z.number(),
+        variationIndex: z.number(),
+        platforms: z.array(
+          z.enum([
+            "twitter",
+            "linkedin",
+            "facebook",
+            "instagram",
+            "email",
+            "direct",
+          ])
+        ),
+      })
+```
+
+## abTesting.updateMetrics
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/abTesting.ts#L195).
+
+```typescript
+z.object({
+        postId: z.number(),
+        variationIndex: z.number(),
+        platform: z.string(),
+        metrics: z.object({
+          impressions: z.number().optional(),
+          engagements: z.number().optional(),
+          clicks: z.number().optional(),
+          shares: z.number().optional(),
+          likes: z.number().optional(),
+          replies: z.number().optional(),
+        }),
+      })
+```
+
+## abTesting.getResults
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/abTesting.ts#L247).
+
+```typescript
+z.object({ postId: z.number() })
+```
+
+## abTesting.completeTest
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/abTesting.ts#L278).
+
+```typescript
+z.object({ postId: z.number() })
+```
+
+## abTesting.applyWinner
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/abTesting.ts#L348).
+
+```typescript
+z.object({
+        postId: z.number(),
+        winningVariationIndex: z.number(),
+      })
+```
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers/abTesting.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/abTesting.ts).

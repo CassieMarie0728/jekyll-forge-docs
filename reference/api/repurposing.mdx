@@ -1,0 +1,102 @@
+---
+title: "repurposing procedures"
+description: "Source input schemas, access wrappers, and handler links for repurposing."
+---
+
+These entries are extracted from the source, not hand-invented endpoint examples. Read [API conventions](/reference/api-overview) before calling them.
+
+## repurposing.generate
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/repurposing.ts#L34).
+
+```typescript
+z.object({
+        postId: z.number(),
+        siteId: z.number(),
+        format: z.enum([
+          "twitter",
+          "linkedin",
+          "tiktok",
+          "youtube",
+          "newsletter",
+          "email",
+          "podcast",
+          "slides",
+        ]),
+      })
+```
+
+## repurposing.getByPost
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/repurposing.ts#L141).
+
+```typescript
+z.object({
+        postId: z.number(),
+      })
+```
+
+## repurposing.getById
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/repurposing.ts#L154).
+
+```typescript
+z.object({
+        id: z.number(),
+      })
+```
+
+## repurposing.update
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/repurposing.ts#L167).
+
+```typescript
+z.object({
+        id: z.number(),
+        content: z.string().optional(),
+        status: z
+          .enum(["generated", "approved", "published", "archived"])
+          .optional(),
+        isCustomized: z.boolean().optional(),
+      })
+```
+
+## repurposing.delete
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/repurposing.ts#L204).
+
+```typescript
+z.object({
+        id: z.number(),
+      })
+```
+
+## repurposing.regenerate
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/repurposing.ts#L226).
+
+```typescript
+z.object({
+        id: z.number(),
+        postId: z.number(),
+        siteId: z.number(),
+      })
+```
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers/repurposing.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/repurposing.ts).

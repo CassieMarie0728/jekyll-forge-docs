@@ -1,47 +1,42 @@
 ---
-title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+title: "Your first saved draft"
+description: "Go from sign-in to a saved draft without accidentally publishing your smoke test."
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
-
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
-
-## Prerequisites
-
-Before you begin, you must have:
-
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
-
-## Get started
+You need a GitHub account, a Jekyll repository you can access, and a repository token with the appropriate permissions. You do not need an AI key to write.
 
 <Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
-
-    ```bash
-    npm install your-package
-    ```
+  <Step title="Open Forge and sign in">
+    Open [Jekyll Forge](https://jekyll-forge.c728.workers.dev/repos) and complete GitHub sign-in. You should return to the repository picker. If sign-in loops or fails, use [access troubleshooting](/guides/github-access).
   </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
-
-    ```bash
-    your-cli init
-    ```
+  <Step title="Connect repository access">
+    Connect your GitHub Personal Access Token through the repository connection controls. OAuth sign-in and repository access are separate. Confirm the displayed GitHub account before continuing.
   </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
-
-    ```bash
-    your-cli start
-    ```
+  <Step title="Choose the destination">
+    Find your repository, select its branch, and confirm the site root. A repository with many files may need more result pages; a Jekyll site can live in a subfolder.
+  </Step>
+  <Step title="Write a harmless draft">
+    Choose **New Post**, enter a recognizable title such as “Forge smoke test,” and write a few lines. Check the post details and front matter before saving.
+  </Step>
+  <Step title="Save and reopen">
+    Click **Save** and wait for success. Open the post list, locate the draft, and reopen it. Confirm both the body and title survived. A browser recovery message alone does not establish this result.
   </Step>
 </Steps>
 
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
+## Your first success signal
 
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
-</Tip>
+The draft appears in the correct Forge workspace and reopens with your text. You have not published a website merely by saving it. Congratulations: the smoke test can remain mercifully invisible to the internet.
+
+## Before your first real publication
+
+Read [Review and publish](/guides/publishing), choose an appropriate test repository or branch, and inspect the exact destination diff. After committing, check the Jekyll deployment and the public URL.
+
+## If the draft is missing
+
+Stay in the same browser. Check **Recovery drafts**, the save status, and the active workspace. Download recoverable work before clearing storage or changing profiles. Follow [Save, recover, publish](/guides/drafts-and-recovery).
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[client/src/pages/RepoPicker.tsx](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/pages/RepoPicker.tsx), [client/src/pages/Editor.tsx](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/client/src/pages/Editor.tsx), [server/routers/posts.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/posts.ts).

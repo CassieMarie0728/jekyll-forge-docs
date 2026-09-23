@@ -1,0 +1,81 @@
+---
+title: "sites procedures"
+description: "Source input schemas, access wrappers, and handler links for sites."
+---
+
+These entries are extracted from the source, not hand-invented endpoint examples. Read [API conventions](/reference/api-overview) before calling them.
+
+## sites.list
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/sites.ts#L12).
+
+No input schema is declared for this procedure.
+
+## sites.get
+
+**Query · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/sites.ts#L14).
+
+```typescript
+z.object({ id: z.number() })
+```
+
+## sites.upsert
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/sites.ts#L18).
+
+```typescript
+z.object({
+        owner: z.string(),
+        repo: z.string(),
+        defaultBranch: z.string().optional(),
+        selectedBranch: z.string().optional(),
+        rootPath: z.string().optional(),
+        isJekyll: z.boolean().optional(),
+        isFavorite: z.boolean().optional(),
+        timezone: z.string().optional(),
+        defaultLayout: z.string().optional(),
+        defaultAssetPath: z.string().optional(),
+      })
+```
+
+## sites.update
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/sites.ts#L37).
+
+```typescript
+z.object({
+        id: z.number(),
+        isFavorite: z.boolean().optional(),
+        selectedBranch: z.string().optional(),
+        rootPath: z.string().optional(),
+        timezone: z.string().optional(),
+        defaultLayout: z.string().optional(),
+        defaultAssetPath: z.string().optional(),
+        aiVoiceProfile: z.string().optional(),
+        settings: z.record(z.string(), z.unknown()).optional(),
+      })
+```
+
+## sites.delete
+
+**Mutation · `protectedProcedure`**
+
+[Handler and return value](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/sites.ts#L56).
+
+```typescript
+z.object({ id: z.number() })
+```
+
+## Source and verification
+
+Source-reviewed against app revision `c889b55` on September 20, 2026. This label establishes implementation evidence, not live acceptance of every operation. See [Current state](/reference/current-state).
+
+[server/routers/sites.ts](https://github.com/CassieMarie0728/jekyll-forge/blob/c889b55402f374d832b2412d9ce1a32c5fae06a7/server/routers/sites.ts).
